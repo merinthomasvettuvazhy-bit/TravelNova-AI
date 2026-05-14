@@ -1,0 +1,1011 @@
+/* =========================================
+   GLOBAL RESET
+========================================= */
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial, Helvetica, sans-serif;
+}
+
+html,
+body{
+  width:100%;
+  height:100%;
+  overflow:hidden;
+}
+
+body{
+  background:#0f172a;
+  color:white;
+  -webkit-tap-highlight-color:transparent;
+}
+
+/* =========================================
+   SMART PANEL TOGGLE
+========================================= */
+
+#panelHeader{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:10px;
+}
+
+#togglePanelBtn{
+  width:32px;
+  height:32px;
+  border:none;
+  border-radius:10px;
+  background:#0f172a;
+  color:white;
+  font-size:22px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+#togglePanelBtn:hover{
+  transform:scale(1.05);
+}
+
+#smartTravelPanel.collapsed .panelItem{
+  display:none;
+}
+
+#smartTravelPanel.collapsed{
+  height:auto;
+  padding-bottom:12px;
+}
+
+/* =========================================
+   MAP LAYERS
+========================================= */
+
+#mapContainer{
+  position:absolute;
+  top:70px;
+  left:0;
+  width:100%;
+  height:calc(100vh - 70px);
+  z-index:1;
+}
+
+#map,
+#maplibre{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  pointer-events:auto;
+}
+
+#map{
+  z-index:1;
+}
+
+#maplibre{
+  z-index:2;
+  display:none;
+}
+
+.maplibregl-map{
+  z-index:1 !important;
+}
+
+/* =========================================
+   UI ALWAYS ABOVE MAP
+========================================= */
+
+#topBar,
+#searchWrapper,
+#alertPanel,
+#bottomPanel,
+#robotBtn,
+#chatbot,
+#topControls{
+  position:fixed !important;
+  z-index:999999 !important;
+  pointer-events:auto !important;
+}
+
+/* =========================================
+   TOP BAR
+========================================= */
+
+#topBar{
+  width:100%;
+  height:70px;
+  background:#111827;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:0 20px;
+  border-bottom:2px solid #1e293b;
+  top:0;
+  left:0;
+}
+
+.logo{
+  font-size:1.7rem;
+  font-weight:bold;
+  color:#38bdf8;
+  z-index:10001;
+}
+
+/* =========================================
+   TOP CONTROLS
+========================================= */
+
+#topControls{
+  top:14px;
+  right:20px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+/* =========================================
+   WEATHER
+========================================= */
+
+#weather{
+  background:#1e293b;
+  padding:10px 18px;
+  border-radius:30px;
+  font-size:0.92rem;
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  white-space:nowrap;
+  min-height:44px;
+  box-shadow:
+    0 0 15px rgba(0,0,0,0.25);
+}
+
+/* =========================================
+   BUTTON BASE
+========================================= */
+
+#darkModeBtn,
+#advanceMapBtn{
+  border:none;
+  outline:none;
+  padding:10px 18px;
+  border-radius:16px;
+  font-size:14px;
+  font-weight:700;
+  cursor:pointer;
+  transition:0.3s ease;
+  white-space:nowrap;
+}
+
+/* =========================================
+   DARK MODE BUTTON
+========================================= */
+
+#darkModeBtn{
+  background:
+  linear-gradient(
+    135deg,
+    #0f172a,
+    #1e293b
+  );
+
+  color:white;
+
+  box-shadow:
+    0 0 12px rgba(0,229,255,0.45),
+    0 0 28px rgba(0,229,255,0.18);
+}
+
+#darkModeBtn:hover{
+  transform:
+    translateY(-2px)
+    scale(1.03);
+
+  box-shadow:
+    0 0 20px rgba(0,229,255,0.75),
+    0 0 40px rgba(0,229,255,0.35);
+}
+
+#darkModeBtn:active{
+  transform:scale(0.96);
+}
+
+/* LIGHT MODE BUTTON STATE */
+
+body:not(.darkTheme) #darkModeBtn{
+  background:
+  linear-gradient(
+    135deg,
+    #ffffff,
+    #f1f5f9
+  );
+
+  color:#111827;
+
+  box-shadow:
+    0 0 10px rgba(0,0,0,0.12);
+}
+
+/* =========================================
+   ADVANCED MAP BUTTON
+========================================= */
+
+#advanceMapBtn{
+  background:
+  linear-gradient(
+    135deg,
+    #00E5FF,
+    #2979FF
+  );
+
+  color:white;
+
+  box-shadow:
+    0 0 15px rgba(0,229,255,0.45);
+}
+
+#advanceMapBtn:hover{
+  transform:translateY(-2px);
+
+  box-shadow:
+    0 0 25px rgba(0,229,255,0.8);
+}
+
+/* =========================================
+   SEARCH WRAPPER
+========================================= */
+
+#searchWrapper{
+  top:90px;
+  left:50%;
+  transform:translateX(-50%);
+  width:92%;
+  max-width:720px;
+}
+
+/* =========================================
+   MAIN SEARCH BAR
+========================================= */
+
+#mainSearchBar{
+  width:100%;
+  background:white;
+  border:1px solid #cbd5e1;
+  border-radius:60px;
+  padding:14px 22px;
+  display:flex;
+  align-items:center;
+  gap:14px;
+  cursor:pointer;
+
+  box-shadow:
+    0 0 20px rgba(0,0,0,0.15);
+
+  transition:0.35s ease;
+}
+
+#mainSearchBar:hover{
+  transform:translateY(-2px);
+
+  border-color:#38bdf8;
+
+  box-shadow:
+    0 0 25px rgba(56,189,248,0.25);
+}
+
+#searchIcon{
+  font-size:1.2rem;
+  color:#0f172a;
+}
+
+#mainSearchInput{
+  flex:1;
+  background:transparent;
+  border:none;
+  outline:none;
+  color:#111827;
+  font-size:1rem;
+  font-weight:500;
+}
+
+#mainSearchInput::placeholder{
+  color:#64748b;
+}
+
+/* =========================================
+   SEARCH DROPDOWN
+========================================= */
+
+#searchDropdown{
+  margin-top:12px;
+  background:#111827;
+  border:1px solid #2474e3;
+  border-radius:24px;
+  padding:20px;
+  display:none;
+
+  animation:dropdownOpen 0.35s ease;
+
+  box-shadow:
+    0 0 25px rgba(30, 22, 124, 0.3);
+}
+
+@keyframes dropdownOpen{
+  from{
+    opacity:0;
+    transform:translateY(-10px);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+#searchContainer{
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+
+.inputGroup{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.inputLabel{
+  color:#38bdf8;
+  font-size:0.9rem;
+  font-weight:600;
+}
+
+.searchInput{
+  width:100%;
+  padding:15px;
+  border:none;
+  border-radius:18px;
+  outline:none;
+  background:#1e293b;
+  color:white;
+  font-size:1rem;
+}
+
+.searchInput::placeholder{
+  color:#94a3b8;
+}
+
+/* =========================================
+   GO BUTTON
+========================================= */
+
+#goBtn{
+  width:100%;
+  padding:15px;
+  border:none;
+  border-radius:18px;
+
+  background:
+  linear-gradient(
+    135deg,
+    #0ea5e9,
+    #8b5cf6
+  );
+
+  color:white;
+  font-size:1rem;
+  font-weight:bold;
+  cursor:pointer;
+
+  transition:0.35s ease;
+}
+
+#goBtn:hover{
+  transform:scale(1.02);
+
+  box-shadow:
+    0 0 20px rgba(56,189,248,0.35);
+}
+
+/* =========================================
+   SUGGESTIONS
+========================================= */
+
+.suggestionsBox{
+  margin-top:12px;
+  background:white;
+  color:black;
+  border-radius:18px;
+  overflow:hidden;
+  max-height:240px;
+  overflow-y:auto;
+}
+
+.suggestionItem{
+  padding:14px;
+  cursor:pointer;
+  border-bottom:1px solid #e2e8f0;
+  transition:0.25s ease;
+}
+
+.suggestionItem:hover{
+  background:#f1f5f9;
+}
+
+/* =========================================
+   ALERT PANEL
+========================================= */
+#smartTravelPanel {
+  position: fixed;
+  left: 20px;
+  top: 150px;
+  width: 260px;
+  background: rgba(17,24,39,0.92);
+  backdrop-filter: blur(10px);
+  border: 1px solid  #071a2f;
+  border-radius: 18px;
+  padding: 15px;
+  z-index: 999999;
+}
+
+.panelTitle {
+  font-weight: 700;
+  color: #38bdf8;
+  margin-bottom: 12px;
+}
+
+.panelItem {
+  background: #071a2f;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 13px;
+}
+
+
+/* =========================================
+   BOTTOM PANEL
+========================================= */
+
+#bottomPanel{
+  bottom:20px;
+  left:50%;
+  transform:translateX(-50%);
+  width:90%;
+  display:flex;
+  justify-content:center;
+  gap:15px;
+  flex-wrap:wrap;
+}
+
+/* =========================================
+   ACTION BUTTONS
+========================================= */
+
+.actionBtn{
+  border:none;
+  color:white;
+  padding:15px 22px;
+  border-radius:18px;
+  cursor:pointer;
+  font-size:0.95rem;
+  font-weight:600;
+  transition:0.35s ease;
+  position:relative;
+  overflow:hidden;
+}
+
+.actionBtn::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-120%;
+  width:60%;
+  height:100%;
+
+  background:
+  linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,255,255,0.7),
+    transparent
+  );
+
+  transform:skewX(-25deg);
+}
+
+.actionBtn:hover::before{
+  animation:shine 1s ease;
+}
+
+.actionBtn:hover{
+  transform:translateY(-3px) scale(1.04);
+}
+
+@keyframes shine{
+  100%{
+    left:130%;
+  }
+}
+
+/* =========================================
+   BUTTON COLORS
+========================================= */
+
+#nearbyBtn{
+  background:
+  linear-gradient(
+    135deg,
+    #00d4ff,
+    #8b5cf6
+  );
+
+  box-shadow:
+    0 0 18px rgba(0,212,255,0.45);
+}
+
+#trafficBtn{
+  background:
+  linear-gradient(
+    135deg,
+    #00ff99,
+    #00bfff
+  );
+
+  box-shadow:
+    0 0 20px rgba(0,255,153,0.45);
+}
+
+#weatherBtn{
+  background:
+  linear-gradient(
+    135deg,
+    #0f172a,
+    #1e3a8a,
+    #2563eb
+  );
+
+  box-shadow:
+    0 0 18px rgba(37,99,235,0.45);
+}
+
+#safetyBtn{
+  background:
+  linear-gradient(
+    135deg,
+    #000000,
+    #ef4444
+  );
+
+  box-shadow:
+    0 0 20px rgba(239,68,68,0.45);
+}
+
+/* =========================================
+   VOICE ORB BUTTON
+========================================= */
+
+.voiceOrbBtn{
+  position:relative;
+  width:60px;
+  height:60px;
+  padding:0;
+  border:none !important;
+  border-radius:50%;
+  background:transparent !important;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:visible;
+  cursor:pointer;
+  box-shadow:none !important;
+  transition:0.35s ease;
+}
+
+.voiceOrbBtn::before{
+  display:none !important;
+}
+
+.voiceOrbBtn:hover{
+  transform:scale(1.06);
+}
+
+.voiceOrb{
+  position:relative;
+  width:52px;
+  height:52px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.orbRing{
+  position:absolute;
+  border-radius:50%;
+  border:1.8px solid transparent;
+}
+
+.ring1{
+  width:52px;
+  height:52px;
+  border-top-color:#ff4fd8;
+  border-bottom-color:#8b5cf6;
+  animation:rotateRing 5s linear infinite;
+}
+
+.ring2{
+  width:36px;
+  height:36px;
+  border-left-color:#38bdf8;
+  border-right-color:#d946ef;
+  animation:rotateRingReverse 3s linear infinite;
+}
+
+.orbCore{
+  width:18px;
+  height:18px;
+  border-radius:50%;
+
+  background:
+  radial-gradient(
+    circle at 30% 30%,
+    #ffffff,
+    #ff4fd8,
+    #8b5cf6
+  );
+
+  box-shadow:
+    0 0 15px #ff4fd8,
+    0 0 30px #8b5cf6;
+
+  animation:orbPulse 2s ease-in-out infinite;
+}
+
+.voicePopupText{
+  position:absolute;
+  bottom:78px;
+
+  background:
+  linear-gradient(
+    135deg,
+    #111827,
+    #1e293b
+  );
+
+  color:white;
+
+  padding:10px 18px;
+
+  border-radius:30px;
+
+  font-size:0.9rem;
+  font-weight:700;
+
+  white-space:nowrap;
+
+  opacity:0;
+
+  transform:
+    translateY(10px)
+    scale(0.92);
+
+  pointer-events:none;
+
+  transition:0.35s ease;
+}
+
+.voiceOrbBtn:hover .voicePopupText{
+  opacity:1;
+
+  transform:
+    translateY(0)
+    scale(1);
+}
+
+@keyframes rotateRing{
+  from{
+    transform:rotate(0deg);
+  }
+
+  to{
+    transform:rotate(360deg);
+  }
+}
+
+@keyframes rotateRingReverse{
+  from{
+    transform:rotate(360deg);
+  }
+
+  to{
+    transform:rotate(0deg);
+  }
+}
+
+@keyframes orbPulse{
+  0%{
+    transform:scale(1);
+  }
+
+  50%{
+    transform:scale(1.12);
+  }
+
+  100%{
+    transform:scale(1);
+  }
+}
+
+/* =========================================
+   ROBOT BUTTON
+========================================= */
+
+#robotBtn{
+  right:20px;
+  bottom:120px;
+
+  width:75px;
+  height:75px;
+
+  border-radius:50%;
+
+  background:
+  linear-gradient(
+    135deg,
+    #38bdf8,
+    #8b5cf6
+  );
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  font-size:2rem;
+
+  cursor:pointer;
+
+  transition:0.4s ease;
+}
+
+#robotBtn:hover{
+  transform:scale(1.1) rotate(8deg);
+
+  background:
+  linear-gradient(
+    135deg,
+    #0ea5e9,
+    #d946ef
+  );
+
+  box-shadow:
+    0 0 30px rgba(56,189,248,0.7),
+    0 0 50px rgba(217,70,239,0.55);
+}
+
+/* =========================================
+   CHATBOT
+========================================= */
+
+#chatbot{
+  right:20px;
+  top:140px;
+
+  width:340px;
+  height:520px;
+
+  background:#111827;
+
+  border-radius:20px;
+
+  overflow:hidden;
+
+  display:none;
+  flex-direction:column;
+
+  border:1px solid #334155;
+
+  box-shadow:
+    0 0 25px rgba(0,0,0,0.45);
+}
+
+#chatHeader{
+  background:
+  linear-gradient(
+    135deg,
+    #0ea5e9,
+    #8b5cf6
+  );
+
+  padding:15px;
+
+  font-weight:bold;
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+#closeChatBtn{
+  width:32px;
+  height:32px;
+
+  border:none;
+  border-radius:50%;
+
+  cursor:pointer;
+
+  color:white;
+  font-size:1rem;
+
+  background:
+  linear-gradient(
+    135deg,
+    #38bdf8,
+    #a855f7
+  );
+
+  transition:0.4s ease;
+}
+
+#closeChatBtn:hover{
+  transform:scale(1.1) rotate(90deg);
+
+  background:
+  linear-gradient(
+    135deg,
+    #0ea5e9,
+    #d946ef
+  );
+}
+
+#chatMessages{
+  flex:1;
+  padding:15px;
+  overflow-y:auto;
+}
+
+.message{
+  margin-bottom:12px;
+  padding:10px;
+  border-radius:12px;
+}
+
+.bot{
+  background:#1e293b;
+}
+
+.user{
+  background:#0284c7;
+  text-align:right;
+}
+
+#chatInputArea{
+  display:flex;
+  gap:10px;
+  padding:10px;
+  background:#0f172a;
+}
+
+#chatInput{
+  flex:1;
+  padding:10px;
+  border:none;
+  border-radius:12px;
+  outline:none;
+}
+
+#sendBtn{
+  background:#0ea5e9;
+  border:none;
+  color:white;
+  padding:10px 15px;
+  border-radius:12px;
+  cursor:pointer;
+}
+
+/* =========================================
+   COMMENT SECTION
+========================================= */
+
+#commentSection{
+  padding:12px;
+  background:#111827;
+  border-top:1px solid #334155;
+}
+
+#commentTitle{
+  margin-bottom:8px;
+  color:#38bdf8;
+}
+
+#commentInput{
+  width:100%;
+  height:70px;
+  border:none;
+  border-radius:12px;
+  padding:10px;
+  resize:none;
+  outline:none;
+}
+
+#commentBtn{
+  margin-top:10px;
+  width:100%;
+  padding:10px;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+
+  background:
+  linear-gradient(
+    135deg,
+    #38bdf8,
+    #8b5cf6
+  );
+
+  color:white;
+  font-weight:bold;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media(max-width:768px){
+
+
+  #searchWrapper{
+    width:95%;
+  }
+
+  #bottomPanel{
+    gap:10px;
+    bottom:14px;
+  }
+
+  .actionBtn{
+    padding:13px 18px;
+    font-size:0.88rem;
+  }
+
+  #robotBtn{
+    width:68px;
+    height:68px;
+    font-size:1.7rem;
+    bottom:110px;
+    right:16px;
+  }
+
+  #chatbot{
+    width:92%;
+    height:78vh;
+    right:4%;
+    top:100px;
+  }
+
+  #weather{
+    display:none;
+  }
+
+  #topControls{
+    top:82px;
+    right:12px;
+    flex-direction:column;
+    align-items:flex-end;
+  }
+
+  #darkModeBtn,
+  #advanceMapBtn{
+    font-size:13px;
+    padding:9px 14px;
+  }
+
+  .logo{
+    font-size:1.25rem;
+  }
+}
